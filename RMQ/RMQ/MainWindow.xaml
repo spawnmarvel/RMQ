@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RMQ"
         mc:Ignorable="d"
-        Title="RMQ" Height="350" Width="525">
+        Title="RMQ Test" Height="800" Width="600">
     <Grid>
-        
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black" Offset="0"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button x:Name="btnSendPacket" Content="Send Packet" HorizontalAlignment="Left" Margin="217,33,0,0" VerticalAlignment="Top" Width="75" Click="btnSendPacket_Click" Height="23"/>
+        <RichTextBox x:Name="richTextBoxLog" HorizontalAlignment="Left" Height="138" Margin="37,607,0,0" VerticalAlignment="Top" Width="525" TextChanged="richTextBoxRec_TextChanged" HorizontalScrollBarVisibility="Auto"
+                 VerticalScrollBarVisibility="Auto">
+            <FlowDocument/>
+        </RichTextBox>
+        <TextBox x:Name="textBoxGetPacket" HorizontalAlignment="Left" Height="23" Margin="37,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
+        <RichTextBox x:Name="richTextBoxRec" HorizontalAlignment="Left" Height="436" Margin="37,132,0,0" VerticalAlignment="Top" Width="394"  HorizontalScrollBarVisibility="Auto"
+                 VerticalScrollBarVisibility="Auto">
+            <FlowDocument/>
+        </RichTextBox>
+        <Button x:Name="btnRecievePacket" Content="Recieve Packet" HorizontalAlignment="Left" Margin="418,33,0,0" VerticalAlignment="Top" Width="101" Height="23" Click="btnRecievePacket_Click"/>
+
     </Grid>
 </Window>

@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+//project
+using RMQ.Util;
 
 namespace RMQ
 {
@@ -20,9 +22,31 @@ namespace RMQ
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnSendPacket_Click(object sender, RoutedEventArgs e)
+        {
+            string rv = textBoxGetPacket.Text;
+            if (rv.Length <= 0)
+            {
+                rv = "No input";
+            }
+            Helper.followTextBoxLog(richTextBoxLog, rv);
+        }
+
+        private void richTextBoxRec_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void btnRecievePacket_Click(object sender, RoutedEventArgs e)
+        {
+            Helper.followTextBoxLog(richTextBoxRec, "got some");
+            Helper.followTextBoxLog(richTextBoxLog, "got some");
         }
     }
 }
