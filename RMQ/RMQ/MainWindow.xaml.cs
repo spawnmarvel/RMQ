@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 //project
 using RMQ.Util;
+using RMQ.Controller;
 
 namespace RMQ
 {
@@ -23,10 +24,17 @@ namespace RMQ
     public partial class MainWindow : Window
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(typeof(MainWindow));
+        private MqHandler mqHandler;
 
         public MainWindow()
         {
             InitializeComponent();
+            logger.Info("\n");
+            logger.Info("*****************************************");
+            logger.Info("************************************");
+            logger.Info("*********************************");
+            logger.Info("RMQ App started");
+            logger.Info("Version 1.1");
         }
 
         private void btnSendPacket_Click(object sender, RoutedEventArgs e)
@@ -37,7 +45,7 @@ namespace RMQ
                 rv = "No input";
             }
             Helper.followTextBoxLog(richTextBoxLog, rv);
-            logger.Debug("Sent packet " + rv);
+            logger.Info("Sent packet " + rv);
         }
 
        
@@ -53,6 +61,29 @@ namespace RMQ
         private void richTextBoxRec_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void btnMakeProducer_Click(object sender, RoutedEventArgs e)
+        {
+            string queue = textBoxMakeQueue.Text;
+            string rv = "New queue ";
+            if (queue.Length <= 3)
+            {
+                rv = "Name must be > 2 chars";
+            }
+            rv += queue;
+            Helper.followTextBoxLog(richTextBoxLog,rv);
+
+
+
+        }
+
+        private void buttonUseDefaultQueue_Click(object sender, RoutedEventArgs e)
+        {
+            mqHandler = new MqHandler();
+            bool status = mqHandler.setUpProducer();
+            Helper.followTextBoxLog(richTextBoxLog, "Setup Producer " + status);
+            Helper.followTextBoxLog(richTextBoxLog, mqHandler.producerConnectionProperties() + " " + status);
         }
     }
 }

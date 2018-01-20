@@ -5,25 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RMQ"
         mc:Ignorable="d"
-        Title="RMQ Test" Height="800" Width="600">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black" Offset="0"/>
-                <GradientStop Color="White" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Button x:Name="btnSendPacket" Content="Send Packet" HorizontalAlignment="Left" Margin="217,33,0,0" VerticalAlignment="Top" Width="75" Click="btnSendPacket_Click" Height="23"/>
-        <RichTextBox x:Name="richTextBoxLog" HorizontalAlignment="Left" Height="138" Margin="37,607,0,0" VerticalAlignment="Top" Width="525" TextChanged="richTextBoxRec_TextChanged" HorizontalScrollBarVisibility="Auto"
+        Title="RMQ Test" Height="800" Width="750" Background="#FFBF6262">
+    <Grid Background="#FFBDB0B0">
+        <Button x:Name="btnSendPacket" Content="Send Packet" HorizontalAlignment="Left" Margin="207,91,0,0" VerticalAlignment="Top" Width="75" Click="btnSendPacket_Click" Height="23"/>
+        <RichTextBox x:Name="richTextBoxLog" HorizontalAlignment="Left" Height="185" Margin="426,559,0,0" VerticalAlignment="Top" Width="294" TextChanged="richTextBoxRec_TextChanged" HorizontalScrollBarVisibility="Auto"
                  VerticalScrollBarVisibility="Auto">
             <FlowDocument/>
         </RichTextBox>
-        <TextBox x:Name="textBoxGetPacket" HorizontalAlignment="Left" Height="23" Margin="37,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
-        <RichTextBox x:Name="richTextBoxRec" HorizontalAlignment="Left" Height="436" Margin="37,132,0,0" VerticalAlignment="Top" Width="394"  HorizontalScrollBarVisibility="Auto"
+        <TextBox x:Name="textBoxGetPacket" HorizontalAlignment="Left" Height="23" Margin="18,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
+        <RichTextBox x:Name="richTextBoxRec" HorizontalAlignment="Left" Height="367" Margin="18,377,0,0" VerticalAlignment="Top" Width="386"  HorizontalScrollBarVisibility="Auto"
                  VerticalScrollBarVisibility="Auto">
+            <RichTextBox.SelectionBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black" Offset="0"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </RichTextBox.SelectionBrush>
             <FlowDocument/>
         </RichTextBox>
-        <Button x:Name="btnRecievePacket" Content="Recieve Packet" HorizontalAlignment="Left" Margin="418,33,0,0" VerticalAlignment="Top" Width="101" Height="23" Click="btnRecievePacket_Click"/>
+        <Button x:Name="btnRecievePacket" Content="Recieve Packet" HorizontalAlignment="Left" Margin="303,91,0,0" VerticalAlignment="Top" Width="101" Height="23" Click="btnRecievePacket_Click"/>
+        <Button x:Name="btnMakeProducer" Content="New Queue" HorizontalAlignment="Left" Margin="611,24,0,0" VerticalAlignment="Top" Width="109" Click="btnMakeProducer_Click" ToolTip="Make a new queue" Height="23"/>
+        <Label x:Name="label" Content="Recieve:" HorizontalAlignment="Left" Margin="18,336,0,0" VerticalAlignment="Top" Width="55"/>
+        <Label x:Name="label1" Content="Log:" HorizontalAlignment="Left" Margin="426,520,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxMakeQueue" HorizontalAlignment="Left" Height="23" Margin="478,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="buttonUseDefaultQueue" Content="Use default queue" HorizontalAlignment="Left" Margin="611,91,0,0" VerticalAlignment="Top" Width="109" Height="23" Click="buttonUseDefaultQueue_Click"/>
 
     </Grid>
 </Window>

@@ -63,13 +63,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controller\MqHandler.cs" />
     <Compile Include="Recieve\Consumer.cs" />
     <Compile Include="Send\Producer.cs" />
     <Compile Include="Util\Helper.cs" />
-    <Compile Include="ViewModel\MessagesQueueViewModel.cs" />
-    <Compile Include="View\QueueView.xaml.cs">
-      <DependentUpon>QueueView.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -82,10 +79,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\QueueView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\MessagesQueue.cs" />
