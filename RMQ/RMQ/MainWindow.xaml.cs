@@ -22,6 +22,7 @@ namespace RMQ
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(typeof(MainWindow));
 
         public MainWindow()
         {
@@ -36,17 +37,22 @@ namespace RMQ
                 rv = "No input";
             }
             Helper.followTextBoxLog(richTextBoxLog, rv);
+            logger.Debug("Sent packet " + rv);
         }
 
-        private void richTextBoxRec_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
+       
 
         private void btnRecievePacket_Click(object sender, RoutedEventArgs e)
         {
             Helper.followTextBoxLog(richTextBoxRec, "got some");
             Helper.followTextBoxLog(richTextBoxLog, "got some");
+            logger.Info("Recieve packet ");
+        }
+
+
+        private void richTextBoxRec_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
