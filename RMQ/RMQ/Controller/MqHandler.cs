@@ -31,15 +31,25 @@ namespace RMQ.Controller
             return status;
 
         }
+        public string getMqInformation()
+        {
+            producer.generateMqInformationHttp();
+            string rv = producer.ApiInformation;
+            return rv;
+            
+        }
 
         public string publishToDeafult(string msg)
         {
+            //add reconnect, check con
             string rv = producer.publishMsgDefault(msg);
             return rv;
         }
         public string getMqPropertiesHost()
         {
             string rv = "";
+
+
             try
             {
                 rv = producer.getMqProperties();

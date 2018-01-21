@@ -8,6 +8,9 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 using System.Collections;
 using RMQ.Model;
+using System.Net.Http;
+using System.Net;
+using Newtonsoft.Json.Linq;
 
 namespace RMQ.Send
 {
@@ -17,18 +20,87 @@ namespace RMQ.Send
         //Main entry point to the RabbitMQ.Net AMQP client API
         private ConnectionFactory conFac;
         //Common AMQP model, spanning the union of the func offred by v 0-8, 0-8qpid and 0-9-1 of AMQP
-        private IModel model { get; set; }
+        private IModel model; // { get; set; }
         //Main interfac to AMQP connection
-        private IConnection conn { get; set; }
+        private IConnection conn; // { get; set; 
         private bool connStatus;
         private static IConnection instance;
         //queue
         private MessageQueue queue;
+        //get RMQ api info
+        private string apiInformation { get; set; }
 
 
         public Producer()
         {
+            
             connStatus = false;
+            
+        }
+        public string ApiInformation
+        {
+            get
+            {
+                return apiInformation;
+            }
+
+            set
+            {
+                apiInformation = value;
+            }
+        }
+        public async void generateMqInformationHttp()
+        {
+            string msg = "HTTP error";
+            string rv = "MQ:";
+            logger.Info("HTTP Get in progress");
+            using (HttpClient client = new HttpClient())
+            {
+
+                var authByteArray = Encoding.ASCII.GetBytes("guest:guest");
+                string auth = Convert.ToBase64String(authByteArray);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", auth);
+                //string url = "http://localhost:15672/api/overview";
+                string url = "http://localhost:15672/api/queues";
+                var response = await client.GetAsync(url);
+
+                if(response.IsSuccessStatusCode)
+                {
+                    msg = "HTTP success";
+                    logger.Info(msg);
+                    var responseContent = response.Content;
+
+                    rv = responseContent.ReadAsStringAsync().Result;
+
+                    
+                    //var data = JObject.Parse(rv);
+                    var data = JArray.Parse(rv);
+                    //logger.Debug("jarray " + data);
+                    foreach(JObject content in data.Children<JObject>())
+                    {
+                        logger.Debug(content.SelectToken("data.name"));
+                        foreach(JProperty pr in content.Properties())
+                        {
+                            //logger.Debug(pr.Value.ToString());
+                           
+                            //logger.Debug("\n");
+                            
+                        }
+                        
+                    }
+
+
+                }
+                else
+                {
+                    logger.Error(msg);
+
+                }
+
+            }
+            apiInformation = rv + "\n Work on Json in JsonTester";
+            logger.Info(rv);
+           
         }
 
         public bool getConnctionStatus()
@@ -53,7 +125,7 @@ namespace RMQ.Send
             catch (NullReferenceException msg)
             {
                 logger.Error(msg);
-                rv += "No connection is established";
+               
             }
             return rv;
         }

@@ -47,11 +47,11 @@ namespace RMQ
             }
             else
             {
-               mqRes =  mqHandler.publishToDeafult(res);
+                mqRes = mqHandler.publishToDeafult(res);
                 Helper.followTextBoxLog(richTextBoxLog, res);
                 logger.Info("Sent packet " + res);
             }
-            Helper.followTextBoxLog(richTextBoxLog, mqRes);
+            Helper.followTextBoxLog(richTextBoxLog, mqRes + " work on reconnect ");
         }
 
 
@@ -103,7 +103,8 @@ namespace RMQ
 
         private void buttonRqmProperties_Click(object sender, RoutedEventArgs e)
         {
-            try {
+            try
+            {
                 Helper.followTextBoxLog(richTextBoxLog, mqHandler.getMqPropertiesHost());
             }
             catch (Exception msg)
@@ -111,9 +112,16 @@ namespace RMQ
                 logger.Error(msg);
                 Helper.followTextBoxLog(richTextBoxLog, "No connection established");
             }
-            
 
 
+
+
+        }
+
+        private void buttonGetRmqApi_Click(object sender, RoutedEventArgs e)
+        {
+            string rv = mqHandler.getMqInformation();
+            Helper.followTextBoxLog(richTextBoxLog, rv);
 
         }
     }

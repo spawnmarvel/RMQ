@@ -30,6 +30,7 @@
         <Button x:Name="buttonUseDefaultQueue" Content="Use default queue" HorizontalAlignment="Left" Margin="210,72,0,0" VerticalAlignment="Top" Width="109" Height="23" Click="buttonUseDefaultQueue_Click"/>
         <Button x:Name="buttonMakeNewQueue" Content="Make new queue" HorizontalAlignment="Left" Margin="210,24,0,0" VerticalAlignment="Top" Width="109" Height="23" Click="buttonMakeNewQueue_Click"/>
         <Button x:Name="buttonRqmProperties" Content="Get Rmq properties" HorizontalAlignment="Left" Margin="611,24,0,0" VerticalAlignment="Top" Width="109" Click="buttonRqmProperties_Click" Height="28"/>
+        <Button x:Name="buttonGetRmqApi" Content="Get HTTP Rmq API" HorizontalAlignment="Left" Margin="611,80,0,0" VerticalAlignment="Top" Width="109" Click="buttonGetRmqApi_Click"/>
 
     </Grid>
 </Window>
