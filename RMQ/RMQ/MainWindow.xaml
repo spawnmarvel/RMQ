@@ -24,7 +24,7 @@
             <FlowDocument/>
         </RichTextBox>
         <Button x:Name="btnRecievePacket" Content="Recieve Packet" HorizontalAlignment="Left" Margin="303,91,0,0" VerticalAlignment="Top" Width="101" Height="23" Click="btnRecievePacket_Click"/>
-        <Button x:Name="btnMakeProducer" Content="New Queue" HorizontalAlignment="Left" Margin="611,24,0,0" VerticalAlignment="Top" Width="109" Click="btnMakeProducer_Click" ToolTip="Make a new queue" Height="23"/>
+        <Button x:Name="btnMakeProducer" Content="New Queue" HorizontalAlignment="Left" Margin="611,24,0,0" VerticalAlignment="Top" Width="109" Click="btnMakeProducer_Click" ToolTip="Make a new queue, exchange and topic with the same name" Height="23"/>
         <Label x:Name="label" Content="Recieve:" HorizontalAlignment="Left" Margin="18,336,0,0" VerticalAlignment="Top" Width="55"/>
         <Label x:Name="label1" Content="Log:" HorizontalAlignment="Left" Margin="426,520,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBoxMakeQueue" HorizontalAlignment="Left" Height="23" Margin="478,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
