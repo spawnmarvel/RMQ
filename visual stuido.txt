@@ -1,2 +1,0 @@
-ctrl k ctrl d =  indent
-ctrl + r + e  = auto setter and getter
