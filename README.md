@@ -1,4 +1,4 @@
-# RMQ
+# RMQ 1.1
 WPF, Windows Presentation Foundation application developed for testing RabbitMQ
 
 ## Prerequisites
