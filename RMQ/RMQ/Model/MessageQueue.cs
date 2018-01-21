@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RMQ.Model
 {
-    class MessagesQueue
+    class MessageQueue
     {
         private string name;
         //Durable (the queue will survive a broker restart)
@@ -25,7 +25,7 @@ namespace RMQ.Model
         /// <param name="surviveRestart"></param>
         /// <param name="privateCon"></param>
         /// <param name="autoDelete"></param>
-        public MessagesQueue(string queueName, bool surviveRestart, bool privateCon, bool autoDelete)
+        public MessageQueue(string queueName, bool surviveRestart, bool privateCon, bool autoDelete)
         {
             this.name = queueName;
             this.durable = surviveRestart;

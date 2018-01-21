@@ -39,16 +39,22 @@ namespace RMQ
 
         private void btnSendPacket_Click(object sender, RoutedEventArgs e)
         {
-            string rv = textBoxGetPacket.Text;
-            if (rv.Length <= 0)
+            string res = textBoxGetPacket.Text;
+            string mqRes = "";
+            if (res.Length <= 0)
             {
-                rv = "No input";
+                res = "No input";
             }
-            Helper.followTextBoxLog(richTextBoxLog, rv);
-            logger.Info("Sent packet " + rv);
+            else
+            {
+               mqRes =  mqHandler.publishToDeafult(res);
+                Helper.followTextBoxLog(richTextBoxLog, res);
+                logger.Info("Sent packet " + res);
+            }
+            Helper.followTextBoxLog(richTextBoxLog, mqRes);
         }
 
-       
+
 
         private void btnRecievePacket_Click(object sender, RoutedEventArgs e)
         {
@@ -63,7 +69,22 @@ namespace RMQ
 
         }
 
+
+
+        private void buttonUseDefaultQueue_Click(object sender, RoutedEventArgs e)
+        {
+            mqHandler = new MqHandler();
+            bool status = mqHandler.setUpProducerDefault();
+            Helper.followTextBoxLog(richTextBoxLog, "Connect to queue: default " + status);
+
+        }
+
         private void btnMakeProducer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void buttonMakeNewQueue_Click(object sender, RoutedEventArgs e)
         {
             string queue = textBoxMakeQueue.Text;
             string rv = "New queue ";
@@ -71,19 +92,29 @@ namespace RMQ
             {
                 rv = "Name must be > 2 chars";
             }
+            else
+            {
+                mqHandler = new MqHandler();
+                rv += mqHandler.setUpProducerNew(queue) + " ";
+            }
             rv += queue;
-            Helper.followTextBoxLog(richTextBoxLog,rv);
-
-
-
+            Helper.followTextBoxLog(richTextBoxLog, "Connect to queue: " + queue + " " + rv);
         }
 
-        private void buttonUseDefaultQueue_Click(object sender, RoutedEventArgs e)
+        private void buttonRqmProperties_Click(object sender, RoutedEventArgs e)
         {
-            mqHandler = new MqHandler();
-            bool status = mqHandler.setUpProducer();
-            Helper.followTextBoxLog(richTextBoxLog, "Setup Producer " + status);
-            Helper.followTextBoxLog(richTextBoxLog, mqHandler.producerConnectionProperties() + " " + status);
+            try {
+                Helper.followTextBoxLog(richTextBoxLog, mqHandler.getMqPropertiesHost());
+            }
+            catch (Exception msg)
+            {
+                logger.Error(msg);
+                Helper.followTextBoxLog(richTextBoxLog, "No connection established");
+            }
+            
+
+
+
         }
     }
 }

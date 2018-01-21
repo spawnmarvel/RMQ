@@ -23,7 +23,7 @@ namespace RMQ.Send
         private bool connStatus;
         private static IConnection instance;
         //queue
-        private MessagesQueue queue;
+        private MessageQueue queue;
 
 
         public Producer()
@@ -35,17 +35,26 @@ namespace RMQ.Send
         {
             return connStatus;
         }
-        public string getMqConnctionProperties()
+        public string getMqProperties()
         {
             string rv = "RMQ connection properties ";
-            IDictionary<string, object> dic = conFac.ClientProperties;
-            foreach(KeyValuePair<string, object> pair in dic)
+            try
             {
-                logger.Debug(pair.Key + " " + pair.Value);
+                IDictionary<string, object> dic = conFac.ClientProperties;
+                foreach (KeyValuePair<string, object> pair in dic)
+                {
+                    logger.Debug(pair.Key + " " + pair.Value);
+                }
+                logger.Debug(dic);
+                rv += "conFac " + conFac.Endpoint.ToString();
+                rv += " model " + model.ToString();
+                logger.Info(rv);
             }
-            logger.Debug(dic);
-            rv += conFac.Endpoint.ToString();
-            logger.Info(rv);
+            catch (NullReferenceException msg)
+            {
+                logger.Error(msg);
+                rv += "No connection is established";
+            }
             return rv;
         }
        /// <summary>
@@ -93,7 +102,7 @@ namespace RMQ.Send
             try
             {
 
-                queue = new MessagesQueue(queueName, true, false, false);
+                queue = new MessageQueue(queueName, true, false, false);
                 logger.Info(queue.toString());
                 model = conn.CreateModel();
                 //create queue
@@ -120,6 +129,44 @@ namespace RMQ.Send
             }
             return status;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="messages"></param>
+        /// <returns></returns>
+        public string publishMsgDefault(string messages)
+        {
+            logger.Info("Publish");
+            string info = "";
+            int id = 0;
+            try
+            {
+                IBasicProperties basicProp = model.CreateBasicProperties();
+                //set persistent true, meaning the msg can be recoverd
+                basicProp.Persistent = true;
+                messages = messages + ";";
+                byte[] load = Encoding.UTF8.GetBytes(messages);
+                PublicationAddress adr = new PublicationAddress(ExchangeType.Direct, "exchange_for_default", "routingKey_for_default");
+                model.BasicPublish(adr, basicProp, load);
+                info = messages;
+                string pub = adr.ToString();
+                info += "ID: " + id + ": To " + pub;
+                logger.Info("Message = " + info + "Published: " + pub);
+                id++;
+
+            }
+            catch (NullReferenceException msg)
+            {
+                info = "" + msg;
+                logger.Error(info);
+            }
+            //model.Dispose();
+            conn.Close();
+            logger.Info("Closing connection");
+
+            return "Published msg:" + info;
+        }
+
 
 
     }

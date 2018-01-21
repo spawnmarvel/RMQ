@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="RMQ Test" Height="800" Width="750" Background="#FFBF6262">
     <Grid Background="#FFBDB0B0">
-        <Button x:Name="btnSendPacket" Content="Send Packet" HorizontalAlignment="Left" Margin="207,91,0,0" VerticalAlignment="Top" Width="75" Click="btnSendPacket_Click" Height="23"/>
+        <Button x:Name="btnSendPacket" Content="Send packet" HorizontalAlignment="Left" Margin="210,135,0,0" VerticalAlignment="Top" Width="109" Click="btnSendPacket_Click" Height="23"/>
         <RichTextBox x:Name="richTextBoxLog" HorizontalAlignment="Left" Height="185" Margin="426,559,0,0" VerticalAlignment="Top" Width="294" TextChanged="richTextBoxRec_TextChanged" HorizontalScrollBarVisibility="Auto"
                  VerticalScrollBarVisibility="Auto">
             <FlowDocument/>
         </RichTextBox>
-        <TextBox x:Name="textBoxGetPacket" HorizontalAlignment="Left" Height="23" Margin="18,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
+        <TextBox x:Name="textBoxGetPacket" HorizontalAlignment="Left" Height="23" Margin="18,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
         <RichTextBox x:Name="richTextBoxRec" HorizontalAlignment="Left" Height="367" Margin="18,377,0,0" VerticalAlignment="Top" Width="386"  HorizontalScrollBarVisibility="Auto"
                  VerticalScrollBarVisibility="Auto">
             <RichTextBox.SelectionBrush>
@@ -23,12 +23,13 @@
             </RichTextBox.SelectionBrush>
             <FlowDocument/>
         </RichTextBox>
-        <Button x:Name="btnRecievePacket" Content="Recieve Packet" HorizontalAlignment="Left" Margin="303,91,0,0" VerticalAlignment="Top" Width="101" Height="23" Click="btnRecievePacket_Click"/>
-        <Button x:Name="btnMakeProducer" Content="New Queue" HorizontalAlignment="Left" Margin="611,24,0,0" VerticalAlignment="Top" Width="109" Click="btnMakeProducer_Click" ToolTip="Make a new queue, exchange and topic with the same name" Height="23"/>
+        <Button x:Name="btnRecievePacket" Content="Recieve packet" HorizontalAlignment="Left" Margin="357,135,0,0" VerticalAlignment="Top" Width="101" Height="23" Click="btnRecievePacket_Click"/>
         <Label x:Name="label" Content="Recieve:" HorizontalAlignment="Left" Margin="18,336,0,0" VerticalAlignment="Top" Width="55"/>
         <Label x:Name="label1" Content="Log:" HorizontalAlignment="Left" Margin="426,520,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBoxMakeQueue" HorizontalAlignment="Left" Height="23" Margin="478,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="buttonUseDefaultQueue" Content="Use default queue" HorizontalAlignment="Left" Margin="611,91,0,0" VerticalAlignment="Top" Width="109" Height="23" Click="buttonUseDefaultQueue_Click"/>
+        <TextBox x:Name="textBoxMakeQueue" HorizontalAlignment="Left" Height="23" Margin="18,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="163"/>
+        <Button x:Name="buttonUseDefaultQueue" Content="Use default queue" HorizontalAlignment="Left" Margin="210,72,0,0" VerticalAlignment="Top" Width="109" Height="23" Click="buttonUseDefaultQueue_Click"/>
+        <Button x:Name="buttonMakeNewQueue" Content="Make new queue" HorizontalAlignment="Left" Margin="210,24,0,0" VerticalAlignment="Top" Width="109" Height="23" Click="buttonMakeNewQueue_Click"/>
+        <Button x:Name="buttonRqmProperties" Content="Get Rmq properties" HorizontalAlignment="Left" Margin="611,24,0,0" VerticalAlignment="Top" Width="109" Click="buttonRqmProperties_Click" Height="28"/>
 
     </Grid>
 </Window>

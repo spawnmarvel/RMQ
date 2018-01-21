@@ -9,6 +9,7 @@ namespace RMQ.Controller
 {
     class MqHandler
     {
+        private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(typeof(MqHandler));
         private Producer producer;
         public MqHandler()
         {
@@ -16,16 +17,38 @@ namespace RMQ.Controller
             producer = new Producer();
         }
 
-        public bool setUpProducer()
+        public bool setUpProducerDefault()
         {
             
             bool status = producer.createMqConnection("default");
             return status;            
 
         }
-        public string producerConnectionProperties()
+        public bool setUpProducerNew(string queueName)
         {
-            return producer.getMqConnctionProperties();
+
+            bool status = producer.createMqConnection(queueName);
+            return status;
+
+        }
+
+        public string publishToDeafult(string msg)
+        {
+            string rv = producer.publishMsgDefault(msg);
+            return rv;
+        }
+        public string getMqPropertiesHost()
+        {
+            string rv = "";
+            try
+            {
+                rv = producer.getMqProperties();
+            }
+            catch(Exception msg)
+            {
+                logger.Error(msg);
+            }
+            return rv;
         }
        
 
