@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//project
 using RMQ.Send;
+using RMQ.Database;
 
 namespace RMQ.Controller
 {
@@ -11,6 +13,8 @@ namespace RMQ.Controller
     {
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(typeof(MqHandler));
         private Producer producer;
+        private SqlStatment sqlStatem;
+
         public MqHandler()
         {
 
@@ -42,7 +46,9 @@ namespace RMQ.Controller
         public string publishToDeafult(string msg)
         {
             //add reconnect, check con
-            string rv = producer.publishMsgDefault(msg);
+            sqlStatem = new SqlStatment();
+            sqlStatem.insertLogStatus();
+            string rv = producer.publishMsgDefault(msg + "make json auth for postgresql");
             return rv;
         }
         public string getMqPropertiesHost()
