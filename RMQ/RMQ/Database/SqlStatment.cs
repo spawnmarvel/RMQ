@@ -8,7 +8,7 @@ using Npgsql;
 
 namespace RMQ.Database
 {
-    class SqlStatment
+    class SqlStatment : IDataBaseStatments
     {
         private DataBaseConnection dbConnection;
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(typeof(SqlStatment));
@@ -40,9 +40,28 @@ namespace RMQ.Database
             }
             catch(NpgsqlException msg)
             {
-                logger.Debug(msg);
+                logger.Error(msg);
             }
         }
 
+        public void insert()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void update()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void delete()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void read()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

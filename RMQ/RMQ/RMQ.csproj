@@ -77,7 +77,9 @@
     </ApplicationDefinition>
     <Compile Include="Controller\MqHandler.cs" />
     <Compile Include="Database\DataBaseConnection.cs" />
+    <Compile Include="Database\IDataBaseStatments.cs" />
     <Compile Include="Database\SqlStatment.cs" />
+    <Compile Include="Model\PriorityQueue.cs" />
     <Compile Include="Recieve\Consumer.cs" />
     <Compile Include="Send\Producer.cs" />
     <Compile Include="Util\Helper.cs" />

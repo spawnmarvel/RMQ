@@ -40,12 +40,24 @@ namespace RMQ.Send
             
         }
         /// <summary>
-        /// get connection
+        /// get connection status
         /// </summary>
         /// <returns></returns>
-        public bool getConnctionStatus()
+        public bool getConnectionStatus()
         {
             return connStatus;
+        }
+        public void closeMqConnection()
+        {
+            try
+            {
+                conn.Close();
+                logger.Info("Closing Mq connection");
+            }
+            catch (Exception msg)
+            {
+                logger.Error(msg);
+            }
         }
         /// <summary>
         /// get api information
@@ -151,7 +163,7 @@ namespace RMQ.Send
        /// <returns></returns>
        public bool createMqConnection(string queueName)
         {
-            logger.Debug("Try create MQ connection for queue " + queueName);
+            logger.Info("Try create MQ connection for queue " + queueName);
             
             try
             {
@@ -252,7 +264,7 @@ namespace RMQ.Send
                 logger.Error(info);
             }
             //model.Dispose();
-            conn.Close();
+            closeMqConnection();
             logger.Info("Closing connection");
 
             return "Published msg:" + info;
