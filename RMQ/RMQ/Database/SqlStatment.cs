@@ -29,6 +29,7 @@ namespace RMQ.Database
                 int rows = cmd.ExecuteNonQuery();
                 string res = "Rows aff " + rows + " sql: " + sql;
                 logger.Info(res);
+                dbConnection.closeDb();
 
             }
             catch(NpgsqlException msg)

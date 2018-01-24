@@ -19,11 +19,23 @@ namespace RMQ.Database
         //private static NpgsqlDataAdapter da;
         //private static NpgsqlCommand cmd;
         // PostgeSQL-style connection string
-        private static string conString = String.Format("Server={0};Port={1};" + "User Id={2};Password={3};Database={4};", "localhost", 5432, "postgres", "rabbit", "rabbitmq_db");
+        private static string conString;
 
         public DataBaseConnection()
         {
-            readJson();
+            setUpConnection(readJsonMakeConnectionString());
+        }
+        public void setUpConnection(string auth)
+        {
+            logger.Info("Set up connection string json");
+            string[] rv = auth.Split(';');
+            string host = rv[0];
+            string database = rv[1];
+            int port = Convert.ToInt32(rv[2]);
+            string user = rv[3];
+            string pass = rv[4];
+            conString = String.Format("Server={0};Port={1};" + "User Id={2};Password={3};Database={4};", host, port, user, pass, database);
+
         }
 
         public NpgsqlConnection getConnection()
@@ -65,25 +77,40 @@ namespace RMQ.Database
             return status;
         }
 
-        public void readJson()
+        /// <summary>
+        /// {"host": "localhost","database": "my_db","port": 9999,"user": "my_user","pass" : "my_password", "description" : "you get the picture"}
+        /// </summary>
+        /// <returns></returns>
+        public string readJsonMakeConnectionString()
         {
-            logger.Debug("Read json");
+
+            string jAuth = "";
+            bool status = false;
             try
             {
 
-           
-            JObject o1 = JObject.Parse(File.ReadAllText(@"auth.json"));
-            using (StreamReader file = File.OpenText(@"auth.json"))
-            using (JsonTextReader reader = new JsonTextReader(file))
-            {
-                JObject o2 = (JObject)JToken.ReadFrom(reader);
-                logger.Debug("json: " + o2);
-            }
+                using (StreamReader file = File.OpenText(@"auth.json"))
+                using (JsonTextReader reader = new JsonTextReader(file))
+                {
+                    JObject authFile = (JObject)JToken.ReadFrom(reader);
+                    //logger.Debug(reader.TokenType + " " + reader.ValueType + " " + reader.Value);
+                    foreach (KeyValuePair<string, JToken> keyValue in authFile)
+                    {
+                        //get the values
+                        //logger.Debug(keyValue.Value.ToString());
+                        jAuth += keyValue.Value.ToString() + ";";
+                        status = true;
+                    }
+
+                }
+
             }
             catch (FileNotFoundException msg)
             {
                 logger.Debug(msg);
             }
+            logger.Debug("Read json file status: " + status);
+            return jAuth;
         }
 
     }
