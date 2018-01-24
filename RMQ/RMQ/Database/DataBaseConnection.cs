@@ -18,13 +18,20 @@ namespace RMQ.Database
         private static NpgsqlConnection conn;
         //private static NpgsqlDataAdapter da;
         //private static NpgsqlCommand cmd;
-        // PostgeSQL-style connection string
+        //PostgeSQL-style connection string
         private static string conString;
 
+        /// <summary>
+        /// constructor
+        /// </summary>
         public DataBaseConnection()
         {
             setUpConnection(readJsonMakeConnectionString());
         }
+        /// <summary>
+        /// set up connection
+        /// </summary>
+        /// <param name="auth"></param>
         public void setUpConnection(string auth)
         {
             logger.Info("Set up connection string json");
@@ -37,11 +44,18 @@ namespace RMQ.Database
             conString = String.Format("Server={0};Port={1};" + "User Id={2};Password={3};Database={4};", host, port, user, pass, database);
 
         }
-
+        /// <summary>
+        /// get connection
+        /// </summary>
+        /// <returns></returns>
         public NpgsqlConnection getConnection()
         {
             return conn;
         }
+        /// <summary>
+        /// open db
+        /// </summary>
+        /// <returns></returns>
         public bool openDb()
         {
             bool status = false;
@@ -59,7 +73,10 @@ namespace RMQ.Database
             return status;
         }
 
-
+        /// <summary>
+        /// close db
+        /// </summary>
+        /// <returns></returns>
         public bool closeDb()
         {
             bool status = false;
@@ -78,7 +95,7 @@ namespace RMQ.Database
         }
 
         /// <summary>
-        /// {"host": "localhost","database": "my_db","port": 9999,"user": "my_user","pass" : "my_password", "description" : "you get the picture"}
+        /// read json, format {"host": "localhost","database": "my_db","port": 9999,"user": "my_user","pass" : "my_password", "description" : "you get the picture"}
         /// </summary>
         /// <returns></returns>
         public string readJsonMakeConnectionString()

@@ -19,7 +19,7 @@ namespace RMQ.Model
         //private string args;
 
         /// <summary>
-        /// Make a queue, name, true, false, false, null
+        /// constructor, make a queue, name, true, false, false, null
         /// </summary>
         /// <param name="queueName"></param>
         /// <param name="surviveRestart"></param>
@@ -33,7 +33,10 @@ namespace RMQ.Model
             this.delete = autoDelete;
         }
 
-
+        /// <summary>
+        /// to string
+        /// </summary>
+        /// <returns></returns>
         public string toString()
         {
             return "Queue info; " + "name ; " +name + "; durable; " + durable + "; exclusive; " + privateCon + "; auto-delete; " + delete;

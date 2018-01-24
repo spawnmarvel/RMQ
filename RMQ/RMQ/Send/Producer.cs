@@ -30,13 +30,26 @@ namespace RMQ.Send
         //get RMQ api info
         private string apiInformation { get; set; }
 
-
+        /// <summary>
+        /// constructor
+        /// </summary>
         public Producer()
         {
             
             connStatus = false;
             
         }
+        /// <summary>
+        /// get connection
+        /// </summary>
+        /// <returns></returns>
+        public bool getConnctionStatus()
+        {
+            return connStatus;
+        }
+        /// <summary>
+        /// get api information
+        /// </summary>
         public string ApiInformation
         {
             get
@@ -49,6 +62,9 @@ namespace RMQ.Send
                 apiInformation = value;
             }
         }
+        /// <summary>
+        /// generate mq information
+        /// </summary>
         public async void generateMqInformationHttp()
         {
             string msg = "HTTP error";
@@ -102,11 +118,10 @@ namespace RMQ.Send
             logger.Info(rv);
            
         }
-
-        public bool getConnctionStatus()
-        {
-            return connStatus;
-        }
+        /// <summary>
+        /// get mq properties
+        /// </summary>
+        /// <returns></returns>
         public string getMqProperties()
         {
             string rv = "RMQ connection properties ";
@@ -130,7 +145,7 @@ namespace RMQ.Send
             return rv;
         }
        /// <summary>
-       /// 
+       /// create mq connection
        /// </summary>
        /// <param name="queueName"></param>
        /// <returns></returns>
@@ -152,7 +167,7 @@ namespace RMQ.Send
                 conFac.AutomaticRecoveryEnabled = true;
                 conn = conFac.CreateConnection();
                 connStatus = true;
-                setUpIntialQueue(queueName);
+                setUpQueue(queueName);
                 logger.Info("Create MQ connection for queue " + queueName + " is " + connStatus);
             }
             catch(BrokerUnreachableException msg)
@@ -166,8 +181,12 @@ namespace RMQ.Send
             return connStatus;
             
         }
-
-        public bool setUpIntialQueue(string queueName)
+        /// <summary>
+        ///  set up queue
+        /// </summary>
+        /// <param name="queueName"></param>
+        /// <returns></returns>
+        public bool setUpQueue(string queueName)
         {
             bool status = false;
             logger.Info("Try setup / creating intial queue");

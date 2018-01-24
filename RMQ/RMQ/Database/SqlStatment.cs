@@ -13,11 +13,17 @@ namespace RMQ.Database
         private DataBaseConnection dbConnection;
         private static readonly log4net.ILog logger = log4net.LogManager.GetLogger(typeof(SqlStatment));
 
+        /// <summary>
+        /// constructor
+        /// </summary>
         public SqlStatment()
         {
             dbConnection = new DataBaseConnection();
         }
 
+        /// <summary>
+        /// test method
+        /// </summary>
         public void insertLogStatus()
         {
             try
