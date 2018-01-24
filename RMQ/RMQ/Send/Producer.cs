@@ -254,14 +254,21 @@ namespace RMQ.Send
                 info = messages;
                 string pub = adr.ToString();
                 info += "ID: " + id + ": To " + pub;
-                logger.Info("Message = " + info + "Published: " + pub);
+                logger.Info("Message = " + info);
                 id++;
 
             }
+            catch(AlreadyClosedException msg)
+            {
+                logger.Error(msg);
+            }
             catch (NullReferenceException msg)
             {
-                info = "" + msg;
-                logger.Error(info);
+                logger.Error(msg);
+            }
+            catch(Exception msg)
+            {
+                logger.Error(msg);
             }
             //model.Dispose();
             closeMqConnection();

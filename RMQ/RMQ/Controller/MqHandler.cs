@@ -48,7 +48,7 @@ namespace RMQ.Controller
             //add reconnect, check con
             sqlStatem = new SqlStatment();
             sqlStatem.insertLogStatus();
-            string rv = producer.publishMsgDefault(msg + "make json auth for postgresql");
+            string rv = producer.publishMsgDefault(msg);
             return rv;
         }
         public string getMqPropertiesHost()
