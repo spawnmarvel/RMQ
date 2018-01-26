@@ -82,6 +82,8 @@ namespace RMQ.Send
             string msg = "HTTP error";
             string rv = "MQ:";
             logger.Info("HTTP Get in progress");
+            //
+            //must add try cacth excption for http and exception
             using (HttpClient client = new HttpClient())
             {
 
@@ -153,6 +155,10 @@ namespace RMQ.Send
             {
                 logger.Error(msg);
                
+            }
+            catch (Exception msg)
+            {
+                logger.Error(msg);
             }
             return rv;
         }
